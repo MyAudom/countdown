@@ -41,7 +41,7 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Update the countdown timer in YY:MM:DD:HH:MM:SS format
-                countdownTimer.innerHTML = `Countdown to NewYear   ${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+                countdownTimer.innerHTML = `Countdown to NewYear <br>  ${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
             } else {
                 clearInterval(timer); // Stop the timer
     
