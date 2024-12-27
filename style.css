@@ -1,0 +1,130 @@
+/* Container Body */
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;  
+}
+
+/* Countdown Styling */
+.countdown {
+  font-family: 'Arial', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  color: #ffffff;
+  background: linear-gradient(145deg, #6a11cb, #2575fc);
+  border-radius: 20px;
+  padding: 40px;
+  width: 550px;
+  margin: 50px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.countdown.hide-background {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  transform: translateX(-50%) scale(0);
+  opacity: 0;
+}
+
+/* Text and Content Styling */
+.text {
+  position: absolute;
+  background: transparent;
+  color: white;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Happy {
+  font-size: 70px;
+  font-family: DaunPenh (Body CS);
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin: 0;
+  padding: 0;
+}
+
+.name {
+  font-size: 100px;
+  text-align: center;
+  font-family: AKbalthom Kbach;
+  color: rgb(240, 223, 169);
+  margin-top: -2;
+}
+
+.wish {
+  font-size: 20px;
+  text-align: center;
+  font-family: AKbalthom Kbach;
+  position: absolute;
+  background: transparent;
+  color: white;
+  top: 75%;
+  padding: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .Happy {
+    font-size: 50px; /* Reduce font size for smaller screens */
+  }
+
+  .name {
+    font-size: 60px; /* Reduce font size */
+  }
+
+  .wish {
+    font-size: 16px; /* Adjust wish font size */
+  }
+
+  img {
+    width: 150px; /* Reduce image size */
+    height: 150px;
+  }
+
+  .countdown {
+    width: 250px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Happy {
+    font-size: 40px; /* Further reduce for very small screens */
+  }
+
+  .name {
+    font-size: 50px;
+  }
+
+  .wish {
+    font-size: 14px;
+    top: 80%; /* Adjust position for smaller screens */
+  }
+
+  img {
+    width: 120px; /* Make the image smaller */
+    height: 120px;
+    top: 95%; /* Adjust image position */
+  }
+
+  .text {
+    top: 25%; /* Adjust main text position */
+  }
+
+  .countdown {
+    width: 200px;
+    padding: 20px;
+    font-size: 2rem;
+  }
+}

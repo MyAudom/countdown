@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Countdown</title>
+</head>
+<body>
+    <div class="countdown">
+        <!-- Placeholder for the countdown timer -->
+        <p id="countdown-timer" aria-live="polite">Countdown to NewYear </p>
+    </div>
+
+    <div class="text" style="display: none;">
+        <!-- New Year message content -->
+        <p class="Happy">🎉Happy New Year🎈</p>
+        <div class="name">2025</div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <!-- Add audio element for New Year sound -->
+    <audio id="newYearSound" preload="auto" autoplay>
+        <source src="Effect.mp3" type="audio/mp3">
+        <source src="Effect.ogg" type="audio/ogg">
+    </audio>
+
+    <script>
+        const countdownTimer = document.getElementById('countdown-timer');
+        const textDiv = document.querySelector('.text');
+        const newYearSound = document.getElementById('newYearSound'); // Audio element
+
+        // Set the countdown target date in Asia/Phnom_Penh time zone (UTC +7)
+        const countdownDate = new Date('2025-01-01T00:00:00+07:00').getTime(); // Local time in Cambodia (January 1, 2025, 00:00:00)
+
+        const timer = setInterval(() => {
+            const now = new Date().getTime(); // Get the current time in milliseconds
+            const distance = countdownDate - now; // Calculate the remaining time
+    
+            if (distance > 0) {
+                // Time calculations for years, months, days, hours, minutes, and seconds
+                const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+                const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+                const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update the countdown timer in YY:MM:DD:HH:MM:SS format
+                countdownTimer.innerHTML = `Countdown to NewYear   ${years}y ${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+            } else {
+                clearInterval(timer); // Stop the timer
+    
+                // Hide the countdown timer
+                countdownTimer.style.display = "none";
+    
+                // Reveal the hidden elements
+                textDiv.style.display = "block";
+                textDiv.classList.add('show'); // Optional animation class
+
+                // Play the New Year sound
+                newYearSound.play().then(() => {
+                    console.log("Audio playing!");
+                }).catch((error) => {
+                    console.error("Audio play error: ", error);
+                });
+
+                // Dynamically load the fireworks script
+                const script = document.createElement('script');
+                script.src = './style.js'; // Load the fireworks effect
+                script.onload = () => console.log('Fireworks script loaded successfully.');
+                script.onerror = () => console.error('Failed to load fireworks script.');
+                document.body.appendChild(script);
+            }
+        }, 1000);
+
+        // Error handling for audio loading
+        newYearSound.onerror = (e) => {
+            console.error('Error loading audio file:', e);
+        };
+    </script>
+</body>
+</html>
