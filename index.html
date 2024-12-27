@@ -34,7 +34,6 @@
     
             if (distance > 0) {
                 // Time calculations for years, months, days, hours, minutes, and seconds
-                const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
                 const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
                 const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -42,7 +41,7 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 // Update the countdown timer in YY:MM:DD:HH:MM:SS format
-                countdownTimer.innerHTML = `Countdown to NewYear   ${years}y ${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+                countdownTimer.innerHTML = `Countdown to NewYear   ${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
             } else {
                 clearInterval(timer); // Stop the timer
     
