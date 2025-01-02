@@ -9,7 +9,7 @@
 <body>
     <div class="countdown">
         <!-- Placeholder for the countdown timer -->
-        <p id="countdown-timer" aria-live="polite">Countdown to NewYear </p>
+        <p id="countdown-timer" aria-live="polite">Countdown to New Year</p>
     </div>
 
     <div class="text" style="display: none;">
@@ -20,48 +20,51 @@
 
     <canvas id="canvas"></canvas>
 
+    <!-- Audio element for New Year sound -->
+    <audio id="newYearSound" src="./newYearSound.mp3" preload="auto"></audio>
+
     <script>
         const countdownTimer = document.getElementById('countdown-timer');
         const textDiv = document.querySelector('.text');
-        const newYearSound = document.getElementById('newYearSound'); // Audio element
+        const newYearSound = document.getElementById('newYearSound');
 
         // Set the countdown target date in Asia/Phnom_Penh time zone (UTC +7)
-        const countdownDate = new Date('2025-01-01T00:00:00+07:00').getTime(); // Local time in Cambodia (January 1, 2025, 00:00:00)
+        const countdownDate = new Date('2025-01-01T00:00:00+07:00').getTime(); 
 
         const timer = setInterval(() => {
             const now = new Date().getTime(); // Get the current time in milliseconds
             const distance = countdownDate - now; // Calculate the remaining time
-    
+
             if (distance > 0) {
-                // Time calculations for years, months, days, hours, minutes, and seconds
+                // Time calculations for months, days, hours, minutes, and seconds
                 const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
                 const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Update the countdown timer in YY:MM:DD:HH:MM:SS format
-                countdownTimer.innerHTML = `Countdown to NewYear <br>  ${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
+                // Update the countdown timer
+                countdownTimer.innerHTML = `Countdown to New Year<br>${months}m ${days}d ${hours.toString().padStart(2, '0')}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
             } else {
                 clearInterval(timer); // Stop the timer
-    
+
                 // Hide the countdown timer
                 countdownTimer.style.display = "none";
-    
-                // Reveal the hidden elements
+
+                // Show the New Year message
                 textDiv.style.display = "block";
                 textDiv.classList.add('show'); // Optional animation class
 
                 // Play the New Year sound
-                newYearSound.play().then(() => {
-                    console.log("Audio playing!");
-                }).catch((error) => {
-                    console.error("Audio play error: ", error);
-                });
+                if (newYearSound) {
+                    newYearSound.play().catch((error) => {
+                        console.error("Audio play error: ", error);
+                    });
+                }
 
                 // Dynamically load the fireworks script
                 const script = document.createElement('script');
-                script.src = './style.js'; // Load the fireworks effect
+                script.src = './fireworks.js'; // Adjust the path to the correct fireworks script
                 script.onload = () => console.log('Fireworks script loaded successfully.');
                 script.onerror = () => console.error('Failed to load fireworks script.');
                 document.body.appendChild(script);
@@ -69,9 +72,9 @@
         }, 1000);
 
         // Error handling for audio loading
-        newYearSound.onerror = (e) => {
+        newYearSound.addEventListener('error', (e) => {
             console.error('Error loading audio file:', e);
-        };
+        });
     </script>
 </body>
 </html>
